@@ -1,0 +1,19 @@
+FROM debian:testing
+ENV DEBIAN_FRONTEND noninteractive
+RUN useradd -u 1000 -m user && \
+echo "user:user" | chpasswd && \
+mkdir /home/user/shared && \
+chown -R user:user /home/user/shared && \
+apt-get update && \
+apt-get -y upgrade && \
+apt-get -y install apt-utils && \
+apt-get -y install sudo && \
+apt-get -y install python3 build-essential graphviz && \
+apt-get -y install kde-plasma-desktop && \
+adduser user sudo
+USER user:user
+WORKDIR /home/user
+# fontconfig-config
+# x11-common
+# ucf 
+ENV DEBIAN_FRONTEND teletype
