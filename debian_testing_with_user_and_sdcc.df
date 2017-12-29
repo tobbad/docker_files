@@ -12,10 +12,16 @@ apt-get -y install sudo && \
 apt-get -y install python python3 build-essential graphviz git locales nano && \
 apt-get -y install chrpath cpio diffstat gawk texinfo wget dialog subversion subversion-tools && \
 apt-get -y install autoconf && \
+apt-get -y build-dep sdcc gputils && \
+apt-get -y purge gputils gputils-common && \
+svn checkout svn://svn.code.sf.net/p/gputils/code/trunk gputils && \
+cd gputils && \
+cd gputils && ./configure --prefix=/usr && make && make install && cd .. && \
+cd .. && \
+rm -rf gputils  && \
+svn checkout svn://svn.code.sf.net/p/sdcc/code/trunk/sdcc sdcc && \
+cd sdcc && ./configure --prefix=/usr && make && make install && cd .. && \
+rm -rf sdcc  && \
 adduser user sudo
 USER user:user
 WORKDIR /home/user
-# fontconfig-config
-# x11-common
-# ucf 
-ENV DEBIAN_FRONTEND teletype

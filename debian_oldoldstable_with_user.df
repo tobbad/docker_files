@@ -1,4 +1,4 @@
-FROM debian:latest
+FROM debian:oldoldstable
 ENV DEBIAN_FRONTEND noninteractive
 RUN useradd -u 1000 -m user && \
 echo "user:user" | chpasswd && \
@@ -11,7 +11,7 @@ apt-get -y install sudo && \
 apt-get -y install python python3 build-essential graphviz git locales nano && \
 apt-get -y install chrpath cpio diffstat gawk texinfo wget dialog && \
 apt-get -y install sdcc && \
-adduser user sudo 
+adduser user sudo
 USER user:user
 WORKDIR /home/user
 # fontconfig-config
