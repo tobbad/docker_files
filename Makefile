@@ -9,6 +9,10 @@ debian_t:
 debian_tsdcc:
 	docker build -t debian_tsdcc -f debian_testing_with_user_and_sdcc.df .
 
+mbed:
+	#docker image rm -f mbed
+	docker build -t mbed -f debian_mbed.df .
+
 debian_s:
 	docker build -t debian_s -f debian_stable_with_user.df .
 	
@@ -20,5 +24,8 @@ debian_oos:
 
 ubuntu_s:
 	docker build -t ubuntu_s -f ubuntu_stable_with_user.df .
+	
+debian_i386_s:
+	docker build -t debian_i386_t -f debiani386_user_x.df .
 	
 	

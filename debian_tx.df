@@ -1,0 +1,16 @@
+FROM debian:testing
+ENV DEBIAN_FRONTEND noninteractive
+RUN useradd -u 1000 -m user && \
+echo "user:user" | chpasswd && \
+mkdir /home/user/shared && \
+chown -R user:user /home/user/shared && \
+echo "deb-src http://deb.debian.org/debian testing main"  >> /etc/apt/sources.list && \
+dpkg --add-architecture i386 && \
+apt-get update && \
+apt-get -y upgrade && \
+apt-get -y install apt-utils && \
+apt-get -y install sudo && \
+apt-get -y install firefox-esr && \
+adduser user sudo
+USER user:user
+WORKDIR /home/user

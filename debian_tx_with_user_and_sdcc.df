@@ -1,0 +1,35 @@
+FROM debian:testing
+ENV DEBIAN_FRONTEND noninteractive
+RUN useradd -u 1000 -m user && \
+echo "user:user" | chpasswd && \
+mkdir /home/user/shared && \
+chown -R user:user /home/user/shared && \
+echo "deb-src http://deb.debian.org/debian testing main"  >> /etc/apt/sources.list && \
+dpkg --add-architecture i386 && \
+apt-get update && \
+apt-get -y upgrade && \
+apt-get -y install apt-utils && 
+apt-get -y install sudo firefox-esr && \
+apt-get -y install python python-pip software-properties-common && \
+apt-get -y install python3 && \
+apt-get -y install build-essential graphviz && \
+apt-get -y install git subversion subversion-tools mercurial locales nano && \
+apt-get -y install chrpath cpio diffstat gawk texinfo wget dialog subversion subversion-tools && \
+apt-get -y install autoconf procps dos2unix && \
+apt-get -y install gcc-arm-none-eabi && \
+apt-get -y install libc6:i386 libgcc1:i386 libx11-6:i386 libexpat1:i386 libxext6:i386 libstdc++6:i386 && \
+apt-get -y build-dep sdcc gputils && \
+apt-get -y purge gputils gputils-common && \
+pip install mbed-cli PrettyTable && \
+mbed toolchain -G GCC_ARM && \
+svn checkout svn://svn.code.sf.net/p/gputils/code/trunk gputils && \
+cd gputils && \
+cd gputils && ./configure --prefix=/usr && make && make install && cd .. && \
+cd .. && \
+rm -rf gputils  && \
+svn checkout svn://svn.code.sf.net/p/sdcc/code/trunk/sdcc sdcc && \
+cd sdcc && ./configure --prefix=/usr && make && make install && cd .. && \
+rm -rf sdcc  && \
+adduser user sudo
+USER user:user
+WORKDIR /home/user
