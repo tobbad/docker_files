@@ -1,13 +1,16 @@
-FROM debian:testing
+FROM debian:stable
 ENV DEBIAN_FRONTEND noninteractive
+ADD modelio-open-source3.7_3.7.1_amd64.deb /modelio.deb
 RUN useradd -u 1000 -m user && \
 echo "user:user" | chpasswd && \
+ls -al / && \
 mkdir /home/user/shared && \
 chown -R user:user /home/user/shared && \
 apt-get update && \
 apt-get -y upgrade && \
 apt-get -y install apt-utils && \
 apt-get -y install sudo && \
+apt-get -y install libatk1.0-0 libgtk2.0-0 libcairo2 libglib2.0-0 libwebkitgtk-1.0-0 libwebkitgtk-3.0-0 libxtst6 && \
 apt-get -y install python python-pip software-properties-common && \
 apt-get -y install python3 && \
 apt-get -y install build-essential graphviz && \
@@ -15,6 +18,7 @@ apt-get -y install git subversion subversion-tools mercurial locales nano && \
 apt-get -y install chrpath cpio diffstat gawk texinfo wget dialog && \
 apt-get -y install autoconf procps dos2unix && \
 apt-get -y install gcc-arm-none-eabi && \
+dpkg -i /modelio.deb && \
 pip install mbed-cli PrettyTable && \
 mbed toolchain -G GCC_ARM && \
 adduser user sudo

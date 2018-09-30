@@ -11,7 +11,8 @@ debian_tsdcc:
 
 mbed:
 	#docker image rm -f mbed
-	docker build -t mbed -f debian_mbed.df .
+	#wget https://www.modelio.org/download/send/28-modelio-3-7-1/123-modelio-3-7-1-red-hat-centos-64-bit.html
+	docker build -t mbed -f ./debian_mbed.df .
 
 debian_s:
 	docker build -t debian_s -f debian_stable_with_user.df .
