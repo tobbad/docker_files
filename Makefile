@@ -29,4 +29,5 @@ ubuntu_s:
 debian_i386_s:
 	docker build -t debian_i386_t -f debiani386_user_x.df .
 	
-	
+mp:
+	docker build -t micropython -f ./debian_mp.df .
